@@ -1,0 +1,1 @@
+ACTION=="add", SUBSYSTEM=="module", KERNEL=="acer_wmi_battery", RUN+="/usr/bin/chmod 666 /sys/bus/wmi/drivers/acer-wmi-battery/health_mode /sys/bus/wmi/drivers/acer-wmi-battery/calibration_mode"

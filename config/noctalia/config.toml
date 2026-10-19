@@ -1,0 +1,97 @@
+# Spike-dotfiles portado (Noctalia v5)
+
+[backdrop]
+enabled = false
+
+[theme]
+mode = "dark"
+source = "custom"
+custom_palette = "Nullscapes"
+
+[shell]
+lang = "es"
+corner_radius_scale = 0.88
+font_family = "JetBrainsMono Nerd Font"
+
+[shell.panel]
+transparency_mode = "soft"
+borders = true
+shadow = true
+
+[shell.screenshot]
+freeze_screen = true
+pipe_to_command = false
+save_to_file = true
+copy_to_clipboard = true
+
+[bar.main]
+thickness = 40
+background_opacity = 0.0
+shadow = false
+contact_shadow = false
+margin_ends = 18
+margin_edge = 10
+padding = 6
+widget_spacing = 8
+capsule = false
+start = ["group:lunar"]
+center = ["group:pulse"]
+end = ["group:signal"]
+
+[[bar.main.capsule_group]]
+id = "lunar"
+members = ["launcher", "wallpaper", "workspaces", "clock"]
+fill = "surface_variant"
+border = "outline"
+foreground = "on_surface"
+padding = 10
+radius = 16
+opacity = 0.58
+widget_spacing = 8
+
+[[bar.main.capsule_group]]
+id = "pulse"
+members = ["audio_visualizer", "media", "audio_visualizer"]
+fill = "surface_variant"
+border = "outline"
+foreground = "on_surface"
+padding = 12
+radius = 16
+opacity = 0.64
+widget_spacing = 8
+
+[[bar.main.capsule_group]]
+id = "signal"
+members = ["keyboard_layout", "tray", "notifications", "clipboard", "network", "bluetooth", "volume", "brightness", "battery", "control-center", "session"]
+fill = "surface_variant"
+border = "outline"
+foreground = "on_surface"
+padding = 10
+radius = 16
+opacity = 0.58
+widget_spacing = 8
+
+[widget.audio_visualizer]
+width = 56
+bands = 20
+mirrored = true
+reversed = false
+centered = true
+show_when_idle = false
+color_1 = "#678FE4"
+color_2 = "#AB66CC"
+
+[osd]
+position = "top_center"
+orientation = "horizontal"
+scale = 1.0
+background_opacity = 0.85
+offset_y = 14
+
+[osd.kinds]
+volume = true
+volume_output = true
+volume_input = true
+brightness = true
+wifi = true
+bluetooth = true

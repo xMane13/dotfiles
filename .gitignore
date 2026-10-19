@@ -1,0 +1,4 @@
+# Estado local de fish y respaldos
+fish_variables
+*.bak*
+dots-backup-*
