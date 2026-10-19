@@ -23,7 +23,9 @@ grep GRUB_CMDLINE_LINUX_DEFAULT /etc/default/grub
 update-grub
 
 echo "==> 4/4 Servicios de suspensión"
-echo 'options nvidia NVreg_PreserveVideoMemoryAllocations=1' > /etc/modprobe.d/nvidia-power.conf
+# PreserveVideoMemoryAllocations=1 hace que el driver 550 falle al suspender (NV_ERR_INSUFFICIENT_RESOURCES)
+# y la GPU no despierta. DynamicPowerManagement=0 evita el método ACPI roto de la BIOS de Acer.
+echo 'options nvidia NVreg_PreserveVideoMemoryAllocations=0 NVreg_DynamicPowerManagement=0x00' > /etc/modprobe.d/nvidia-power.conf
 systemctl enable nvidia-suspend.service nvidia-hibernate.service nvidia-resume.service || true
 update-initramfs -u
 

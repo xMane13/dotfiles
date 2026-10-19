@@ -256,6 +256,18 @@ La tarjeta de Intel cree que conectaste audífonos y cambia a un perfil sin "Spe
 </details>
 
 <details>
+<summary><b>La laptop se queda en negro al suspender (cerrar la tapa)</b></summary>
+
+Con el driver 550, `NVreg_PreserveVideoMemoryAllocations=1` hace que el driver falle al guardar la memoria de video al suspender (`NV_ERR_INSUFFICIENT_RESOURCES` en `fbsr_gm107.c`) y al despertar la GPU repite `kbusVerifyBar2_GM107 ... returned garbage`. Además la BIOS de Acer tiene roto el método ACPI que apaga la NVIDIA (`RP05.PCRP._OFF`). Solución, ya incluida en los scripts de NVIDIA:
+
+```
+options nvidia NVreg_PreserveVideoMemoryAllocations=0 NVreg_DynamicPowerManagement=0x00
+```
+
+en `/etc/modprobe.d/nvidia-power.conf`, y luego `sudo update-initramfs -u`. Cierra juegos o apps de CUDA antes de suspender, porque la memoria de la NVIDIA ya no se guarda.
+</details>
+
+<details>
 <summary><b>La batería no pasa del 80%</b></summary>
 
 El límite queda guardado en el firmware aunque reinstales. Instala el módulo con `scripts/bateria-acer.sh` y haz `batlim off`.

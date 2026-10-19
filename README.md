@@ -259,6 +259,18 @@ The Intel sound card thinks headphones were plugged in and switches to a profile
 </details>
 
 <details>
+<summary><b>Laptop freezes on a black screen after suspend (closing the lid)</b></summary>
+
+With driver 550, `NVreg_PreserveVideoMemoryAllocations=1` makes the driver fail while saving video memory on suspend (`NV_ERR_INSUFFICIENT_RESOURCES` in `fbsr_gm107.c`), and on resume the GPU spams `kbusVerifyBar2_GM107 ... returned garbage`. The Acer BIOS also has a broken ACPI method to power the dGPU off (`RP05.PCRP._OFF`). Fix, already in the NVIDIA scripts:
+
+```
+options nvidia NVreg_PreserveVideoMemoryAllocations=0 NVreg_DynamicPowerManagement=0x00
+```
+
+in `/etc/modprobe.d/nvidia-power.conf`, then `sudo update-initramfs -u`. Close games or CUDA apps before suspending, since NVIDIA video memory is no longer saved.
+</details>
+
+<details>
 <summary><b>Battery won't charge past 80%</b></summary>
 
 The limit is stored in the firmware and survives reinstalls. Install the module with `scripts/bateria-acer.sh` and run `batlim off`.
